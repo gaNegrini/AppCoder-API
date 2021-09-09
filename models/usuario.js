@@ -1,38 +1,33 @@
+const app = require("express");
 const connection = require("../config/database");
 
 class Usuario {
-    constructor(nome, email, password) {
+    constructor(nome, email, newemail, password) {
         this.nome = nome;
         this.email = email;
         this.password = password;
+        this.newemail = newemail;
     };
-
-        //PROCURAR/VERIFICAR EMAIL 
-        static searchEmail(email) {
-            return connection.query
-            ('SELECT * FROM `usuarios` WHERE `email` = ?', [email])
-        }
 
         //CRIAR USUÁRIO
         static createUser(Usuario) {
             return connection.query
             ('INSERT INTO usuarios (nome, email, password) VALUES ("?", "?", "?")', [Usuario.nome, Usuario.email, Usuario.password]),
-            console.log("Usuário criado com sucesso")
+            console.log("Usuário criado com sucesso");
         };
-
-        //LER TODOS OS USUÁRIOS CADASTRADOS
-        static readUser() {
-            return connection.query
-            ('SELECT * FROM usuarios');
-        };
+        
 
         //ATUALIZAR USUÁRIO CADASTRADO
-        static updateUser() {};
+        static updateUser(Usuario) {
+            return connection.query
+            ('UPDATE usuarios SET nome = ?, email = ?, password = ? WHERE email = ?', [Usuario.nome, Usuario.newemail, Usuario.password, Usuario.email]),
+            console.log("Conta atualizada com sucesso")
+        };
 
         //DELETAR USUÁRIO CADASTRADO
         static deleteUser(Usuario) {
             return connection.query
-            ('DELETE FROM usuarios WHERE email "?"', [Usuario.email]),
+            ('DELETE FROM usuarios WHERE email = ?', Usuario),
             console.log("Usuário removido com sucesso")
         };
 
