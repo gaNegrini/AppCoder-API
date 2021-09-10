@@ -7,7 +7,8 @@ const router = require('express').Router();
 // ROTA POST CADASTRAR UM USUÁRIO
 router.post('/register', (req, res) => {
     let data = req.body
-    createUser(data)
+    console.log(data);
+    createUser(data);
     
     res.send({ message: "Conta criada com sucesso" });
 
@@ -23,17 +24,19 @@ router.get('/users', (req, res) => {
 //ROTA PUT ATUALIZAR DADOS USUÁRIO
 router.put('/update', (req, res) => {
     let data = req.body;
-    updateUser(data)
+    console.log(data);
+    updateUser(data);
 
     res.send({ message: "Conta atualizada com sucesso" });
 });
     
 //ROTA DELETE REMOVER UM USUÁRIO
-router.delete('/remove', (req, res) => {
-    let data = req.body.email
-    deleteUser(data)
+router.delete('/remove/:email', (req, res) => {
+    let data = req.params.email
+    console.log("Conta removida: " + data);
+    // deleteUser(data);
 
-    res.send({ message: "Conta removida com sucesso"})
+    // res.send({ message: "Conta removida com sucesso"})
 });
 
 module.exports = router;

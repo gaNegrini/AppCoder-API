@@ -12,7 +12,7 @@ class Usuario {
         //CRIAR USUÁRIO
         static createUser(Usuario) {
             return connection.query
-            ('INSERT INTO usuarios (nome, email, password) VALUES ("?", "?", "?")', [Usuario.nome, Usuario.email, Usuario.password]),
+            ('INSERT INTO usuarios (nome, email, password) VALUES (?, ?, ?)', [Usuario.nome, Usuario.email, Usuario.password]),
             console.log("Usuário criado com sucesso");
         };
         
