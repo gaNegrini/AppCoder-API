@@ -34,9 +34,9 @@ router.put('/update', (req, res) => {
 router.delete('/remove/:email', (req, res) => {
     let data = req.params.email
     console.log("Conta removida: " + data);
-    // deleteUser(data);
+    deleteUser(data);
 
-    // res.send({ message: "Conta removida com sucesso"})
+    res.send({ message: "Conta removida com sucesso"})
 });
 
 module.exports = router;

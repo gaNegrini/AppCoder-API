@@ -2,18 +2,26 @@ const app = require("express");
 const connection = require("../config/database");
 
 class Usuario {
-    constructor(nome, email, newemail, password) {
+    constructor(id_usuario, nome, email, newemail, password) {
+        this.id_usuario = id_usuario;
         this.nome = nome;
         this.email = email;
         this.password = password;
         this.newemail = newemail;
     };
 
-        //CRIAR USUÁRIO
+        // CRIAR USUÁRIO
         static createUser(Usuario) {
             return connection.query
             ('INSERT INTO usuarios (nome, email, password) VALUES (?, ?, ?)', [Usuario.nome, Usuario.email, Usuario.password]),
             console.log("Usuário criado com sucesso");
+        };
+
+        async readUser() {
+            try {
+                await connection.query
+                ('SELECT * FROM usuarios')
+            } catch(error) { console.log(error) };
         };
         
 
